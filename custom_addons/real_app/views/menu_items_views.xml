@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu gốc -->
+    <menuitem id="menu_root" name="Main Menu" web_icon="real_app,static/random_icon.svg"/>
+
+    <!-- Menu con cấp 1 -->
+    <menuitem id="menu_sub_1" name="Sub Menu 1" parent="menu_root" action="real_app.action_property"/>
+    <menuitem id="menu_sub_2" name="Sub Menu 2" parent="menu_root" action="real_app.action_real_estate"/>
+
+    <!-- Menu con cấp 2 -->
+    <menuitem id="menu_sub_1_1" name="Sub Menu 1.1" parent="menu_sub_1"/>
+</odoo>

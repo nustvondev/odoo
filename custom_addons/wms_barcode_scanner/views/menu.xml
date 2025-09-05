@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <!-- Action mở URL route của controller -->
+  <record id="action_wms_scanner" model="ir.actions.act_url">
+    <field name="name">Barcode Scanner</field>
+    <field name="url">/wms/scanner</field>
+    <field name="target">self</field>
+  </record>
+
+  <!-- Menu trong Inventory (Stock) -->
+  <menuitem id="menu_wms_scanner_root"
+            name="Barcode Scanner"
+            parent="stock.menu_stock_root"
+            action="action_wms_scanner"
+            sequence="95"/>
+</odoo>

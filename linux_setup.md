@@ -60,6 +60,12 @@ Chạy lệnh sau để khởi động Odoo với file cấu hình vừa tạo:
 python3 odoo-bin --config .odoorc
 ```
 
+Restart Odoo nếu cần thiết.
+
+```bash
+python3 odoo-bin -c .odoorc -d inventory -u all
+```
+
 ---
 
 ✅ Odoo của bạn đã sẵn sàng chạy trên Linux!

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template cho giao diện scanner -->
+    <template id="scanner_template" name="Giao diện Scanner Kiểm Kho">
+        <t t-call="web.layout">
+            <t t-set="head_website">
+                <link rel="stylesheet" type="text/css" href="/kiem_kho/static/src/css/kiem_kho.css"/>
+            </t>
+            
+            <div class="container-fluid h-100">
+                <div class="row h-100">
+                    <!-- Left Panel -->
+                    <div class="col-8 left-panel">
+                        <div class="panel-header">
+                            <h1 class="panel-title">
+                                Kiểm Kho: <t t-esc="session.name"/>
+                            </h1>
+                            <p class="panel-subtitle">
+                                Kho: <t t-esc="session.location_id.name"/> | 
+                                Người thực hiện: <t t-esc="session.user_id.name"/>
+                            </p>
+                        </div>
+
+                        <div class="input-section">
+                            <div class="input-group">
+                                <input type="text" class="barcode-input" id="barcodeInput" 
+                                       placeholder="Nhập hoặc quét mã vạch..." autocomplete="off"/>
+                                <button class="scan-button" id="scanButton">
+                                    <span>📷</span>
+                                    <span>Thêm</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="items-container" id="itemsContainer">
+                            <div class="items-grid" id="itemsGrid">
+                                <t t-foreach="lines" t-as="line">
+                                    <div class="item-card" t-att-data-id="line.id">
+                                        <button class="remove-btn" t-att-onclick="'removeItem(' + str(line.id) + ')'">×</button>
+                                        <div class="barcode-text" t-esc="line.barcode"/>
+                                        <div class="product-name" t-esc="line.product_name"/>
+                                        <div class="item-time" t-esc="line.scan_time.strftime('%H:%M:%S')"/>
+                                    </div>
+                                </t>
+                            </div>
+                            <div class="empty-state" id="emptyState" t-att-style="'display: none' if lines else 'display: flex'">
+                                <div class="empty-icon">📦</div>
+                                <div class="empty-text">Chưa có sản phẩm nào được quét</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel -->
+                    <div class="col-4 right-panel">
+                        <div class="confirm-section">
+                            <div class="item-count" id="itemCount" t-esc="len(lines)"/>
+                            <div class="count-label">Sản phẩm đã quét</div>
+                            <button class="confirm-button" id="confirmButton" 
+                                    t-att-disabled="'disabled' if not lines else None">
+                                Hoàn thành kiểm kho
+                            </button>
+                            <br/><br/>
+                            <a href="/web#id={session.id}&amp;action=kiem_kho.action_kiem_kho_session&amp;model=kiem.kho.session&amp;view_type=form" 
+                               class="btn btn-secondary btn-lg">
+                                Quay lại Odoo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toast Notification -->
+            <div class="toast" id="toast"></div>
+
+            <script type="text/javascript" src="/kiem_kho/static/src/js/kiem_kho.js"></script>
+            <script type="text/javascript">
+                // Khởi tạo với session_id
+                window.sessionId = <t t-esc="session_id"/>;
+                
+                // Khởi tạo scanner
+                document.addEventListener('DOMContentLoaded', function() {
+                    initializeScanner();
+                });
+            </script>
+        </t>
+    </template>
+    
+    <!-- Action mở scanner -->
+    <record id="action_open_scanner" model="ir.actions.act_url">
+        <field name="name">Mở Scanner</field>
+        <field name="url">/kiem_kho/scanner/%(id)s</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

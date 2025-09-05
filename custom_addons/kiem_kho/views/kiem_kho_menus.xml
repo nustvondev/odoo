@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Actions -->
+    <record id="action_kiem_kho_session" model="ir.actions.act_window">
+        <field name="name">Phiên Kiểm Kho</field>
+        <field name="res_model">kiem.kho.session</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo phiên kiểm kho đầu tiên!
+            </p>
+            <p>
+                Tạo phiên kiểm kho mới để bắt đầu quét barcode và quản lý hàng tồn kho.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_kiem_kho_line" model="ir.actions.act_window">
+        <field name="name">Chi tiết Kiểm Kho</field>
+        <field name="res_model">kiem.kho.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có dữ liệu kiểm kho!
+            </p>
+            <p>
+                Các dòng kiểm kho sẽ hiển thị sau khi bạn tạo phiên kiểm kho và quét sản phẩm.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu chính -->
+    <menuitem id="menu_kiem_kho_root" 
+              name="Kiểm Kho" 
+              sequence="50" 
+              web_icon="kiem_kho,static/description/icon.png"/>
+
+    <!-- Menu con -->
+    <menuitem id="menu_kiem_kho_session" 
+              name="Phiên Kiểm Kho" 
+              parent="menu_kiem_kho_root" 
+              action="action_kiem_kho_session" 
+              sequence="10"/>
+
+    <menuitem id="menu_kiem_kho_line" 
+              name="Chi tiết Kiểm Kho" 
+              parent="menu_kiem_kho_root" 
+              action="action_kiem_kho_line" 
+              sequence="20"/>
+
+    <!-- Submenu Báo cáo -->
+    <menuitem id="menu_kiem_kho_reports" 
+              name="Báo cáo" 
+              parent="menu_kiem_kho_root" 
+              sequence="90"/>
+</odoo>

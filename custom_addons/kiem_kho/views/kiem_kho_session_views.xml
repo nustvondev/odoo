@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view cho phiên kiểm kho -->
+    <record id="view_kiem_kho_session_form" model="ir.ui.view">
+        <field name="name">kiem.kho.session.form</field>
+        <field name="model">kiem.kho.session</field>
+        <field name="arch" type="xml">
+            <form string="Phiên Kiểm Kho">
+                <header>
+                    <button name="action_start" string="Bắt đầu" type="object" 
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_finish" string="Hoàn thành" type="object" 
+                            class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Hủy bỏ" type="object" 
+                            invisible="state in ['done', 'cancelled']"/>
+                    <button name="action_reset_to_draft" string="Đặt lại nháp" type="object" 
+                            invisible="state not in ['cancelled']"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="state == 'done'"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" readonly="state == 'done'"/>
+                            <field name="location_id" readonly="state == 'done'"/>
+                            <field name="total_lines"/>
+                        </group>
+                        <group>
+                            <field name="start_date" readonly="1"/>
+                            <field name="end_date" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Nút mở giao diện quét -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_open_scanner)d" type="action" 
+                                class="oe_stat_button" icon="fa-qrcode"
+                                invisible="state != 'in_progress'">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Mở</span>
+                                <span class="o_stat_text">Scanner</span>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <notebook>
+                        <page string="Danh sách sản phẩm">
+                            <!-- chỉ giữ line_ids, bỏ tree/form con để không lỗi -->
+                            <field name="line_ids" readonly="state == 'done'"/>
+                        </page>
+                        <page string="Ghi chú">
+                            <field name="notes" readonly="state == 'done'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <!-- List view cho phiên kiểm kho -->
+    <record id="view_kiem_kho_session_tree" model="ir.ui.view">
+        <field name="name">kiem.kho.session.tree</field>
+        <field name="model">kiem.kho.session</field>
+        <field name="arch" type="xml">
+            <list string="Phiên Kiểm Kho">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="location_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="total_lines"/>
+                <field name="state" widget="badge" 
+                       decoration-success="state == 'done'"
+                       decoration-info="state == 'in_progress'"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+
+    <!-- Search view -->
+    <record id="view_kiem_kho_session_search" model="ir.ui.view">
+        <field name="name">kiem.kho.session.search</field>
+        <field name="model">kiem.kho.session</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm phiên kiểm kho">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="location_id"/>
+                <filter string="Nháp" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Đang thực hiện" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter string="Hoàn thành" name="done" domain="[('state', '=', 'done')]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Trạng thái" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Người thực hiện" name="group_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Kho" name="group_location" context="{'group_by': 'location_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

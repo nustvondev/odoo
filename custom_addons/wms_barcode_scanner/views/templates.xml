@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="scanner_page" name="WMS Barcode Scanner">
+    <t t-call="web.layout">
+      <div id="wms_scanner_root">
+        <!--
+          Phần body HTML gốc được render tại đây.
+          CSS & JS được nạp thông qua assets ở manifest.
+        -->
+        <div class="container">
+          <!-- Left Panel -->
+          <div class="left-panel">
+            <div class="panel-header">
+              <h1 class="panel-title">Scanned Items</h1>
+              <p class="panel-subtitle">Enter or scan barcodes to add items to the list</p>
+            </div>
+
+            <div class="input-section">
+              <div class="input-group">
+                <input type="text" class="barcode-input" id="barcodeInput" placeholder="Enter barcode or scan..." autocomplete="off"/>
+                <button class="scan-button" id="scanButton">
+                  <span>📷</span>
+                  <span>Add Item</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="items-container" id="itemsContainer">
+              <div class="items-grid" id="itemsGrid"></div>
+              <div class="empty-state" id="emptyState">
+                <div class="empty-icon">📦</div>
+                <div class="empty-text">No items scanned yet</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Panel -->
+          <div class="right-panel">
+            <div class="confirm-section">
+              <div class="item-count" id="itemCount">0</div>
+              <div class="count-label">Items Ready</div>
+              <button class="confirm-button" id="confirmButton" disabled>Confirm &amp; Process</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+      </div>
+    </t>
+  </template>
+</odoo>

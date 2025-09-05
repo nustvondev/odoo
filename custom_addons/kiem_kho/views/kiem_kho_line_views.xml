@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view cho dòng kiểm kho -->
+    <record id="view_kiem_kho_line_form" model="ir.ui.view">
+        <field name="name">kiem.kho.line.form</field>
+        <field name="model">kiem.kho.line</field>
+        <field name="arch" type="xml">
+            <form string="Dòng Kiểm Kho">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="session_id"/>
+                            <field name="barcode"/>
+                            <field name="product_id"/>
+                            <field name="product_name"/>
+                        </group>
+                        <group>
+                            <field name="scanned_qty"/>
+                            <field name="theoretical_qty"/>
+                            <field name="difference_qty"/>
+                            <field name="scan_time"/>
+                        </group>
+                    </group>
+                    <field name="notes"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List view cho dòng kiểm kho -->
+    <record id="view_kiem_kho_line_list" model="ir.ui.view">
+        <field name="name">kiem.kho.line.list</field>
+        <field name="model">kiem.kho.line</field>
+        <field name="arch" type="xml">
+            <list string="Dòng Kiểm Kho">
+                <field name="session_id"/>
+                <field name="barcode"/>
+                <field name="product_id"/>
+                <field name="product_name"/>
+                <field name="scanned_qty"/>
+                <field name="theoretical_qty"/>
+                <field name="difference_qty"
+                       decoration-danger="difference_qty != 0"
+                       decoration-success="difference_qty == 0"/>
+                <field name="scan_time"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_kiem_kho_line_search" model="ir.ui.view">
+        <field name="name">kiem.kho.line.search</field>
+        <field name="model">kiem.kho.line</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm dòng kiểm kho">
+                <field name="barcode"/>
+                <field name="product_id"/>
+                <field name="session_id"/>
+                <filter string="Có chênh lệch" name="has_difference"
+                        domain="[('difference_qty', '!=', 0)]"/>
+                <filter string="Không chênh lệch" name="no_difference"
+                        domain="[('difference_qty', '=', 0)]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Phiên kiểm kho" name="group_session"
+                            context="{'group_by': 'session_id'}"/>
+                    <filter string="Sản phẩm" name="group_product"
+                            context="{'group_by': 'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

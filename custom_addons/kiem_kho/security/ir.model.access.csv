@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kiem_kho_session_user,access_kiem_kho_session_user,model_kiem_kho_session,stock.group_stock_user,1,1,1,1
+access_kiem_kho_session_manager,access_kiem_kho_session_manager,model_kiem_kho_session,stock.group_stock_manager,1,1,1,1
+access_kiem_kho_line_user,access_kiem_kho_line_user,model_kiem_kho_line,stock.group_stock_user,1,1,1,1
+access_kiem_kho_line_manager,access_kiem_kho_line_manager,model_kiem_kho_line,stock.group_stock_manager,1,1,1,1
