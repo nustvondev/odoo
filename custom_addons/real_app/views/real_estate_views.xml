@@ -1,9 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <!-- Form View -->
+        <record id="view_real_estate_form" model="ir.ui.view">
+            <field name="name">realestate.properties.form</field>
+            <field name="model">realestate.properties</field>
+            <field name="arch" type="xml">
+                <form string="Real Estate Property">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="photo"/>
+                        </group>
+                        <group>
+                            <field name="post_code"/>
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                        </group>
+                        <group>
+                            <field name="bedrooms"/>
+                            <field name="facades"/>
+                            <field name="living_area"/>
+                        </group>
+                        <group>
+                            <field name="garden"/>
+                            <field name="garden_orient"/>
+                            <field name="garden_area"/>
+                        </group>
+                        <group>
+                            <field name="available_from"/>
+                            <field name="deadline"/>
+                            <field name="status"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- List View -->
+        <record id="view_real_estate_list" model="ir.ui.view">
+            <field name="name">realestate.properties.list</field>
+            <field name="model">realestate.properties</field>
+            <field name="arch" type="xml">
+                <list string="Real Estate Properties">
+                    <field name="name"/>
+                    <field name="post_code"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
+                    <field name="bedrooms"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+
         <!-- Action -->
         <record id="action_real_estate" model="ir.actions.act_window">
-            <field name="name">Properties 11111</field>
+            <field name="name">Properties</field>
             <field name="res_model">realestate.properties</field>
             <field name="view_mode">list,form</field>
             <field name="help" type="html">

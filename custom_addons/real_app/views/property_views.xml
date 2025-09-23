@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+
+        <!-- Form View -->
+        <record id="real_property_form_view" model="ir.ui.view">
+            <field name="name">real.property.form</field>
+            <field name="model">real.property</field>
+            <field name="arch" type="xml">
+                <form string="Property">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="price"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
         <!-- Action -->
         <record id="action_property" model="ir.actions.act_window">
             <field name="name">Properties</field>

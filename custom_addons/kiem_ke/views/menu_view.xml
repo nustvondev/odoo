@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- Menu chính -->
+        <menuitem id="menu_kiem_ke_root"
+                  name="Kiểm Kê"
+                  sequence="50"
+                  web_icon="kiem_ke,static/description/img/kienke.png"/>
+
+        <!-- Menu con -->
+        <menuitem id="menu_kiem_ke"
+                  name="Phiên Kiểm Kho"
+                  parent="menu_kiem_ke_root"
+                  action="kiem_ke_action"
+        />
+    </data>
+
+</odoo>

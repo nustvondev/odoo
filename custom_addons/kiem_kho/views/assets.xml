@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="kiem_kho assets backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/kiem_kho/static/src/css/kiem_kho.css"/>
+            <script type="text/javascript" src="/kiem_kho/static/src/js/kiem_kho.js"></script>
+        </xpath>
+    </template>
+
+    <template id="assets_frontend" name="kiem_kho assets frontend" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/kiem_kho/static/src/css/kiem_kho.css"/>
+            <script type="text/javascript" src="/kiem_kho/static/src/js/kiem_kho.js"></script>
+        </xpath>
+    </template>
+</odoo>

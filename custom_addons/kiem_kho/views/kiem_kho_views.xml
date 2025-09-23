@@ -88,7 +88,7 @@
     <!-- Action mở scanner -->
     <record id="action_open_scanner" model="ir.actions.act_url">
         <field name="name">Mở Scanner</field>
-        <field name="url">/kiem_kho/scanner/%(id)s</field>
+        <field name="url">/kiem_kho/scanner/1</field>
         <field name="target">new</field>
     </record>
 </odoo>

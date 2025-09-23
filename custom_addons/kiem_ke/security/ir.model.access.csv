@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kiem_ke_kiem_ke,access_kiem_ke_kiem_ke,model_kiem_ke_scanned_item,base.group_user,1,1,1,1
